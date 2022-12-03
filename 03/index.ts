@@ -19,7 +19,7 @@ export function part1(input: string[]): number {
 }
 
 export const getBadgeForGroup = (group: string[]): string => {
-	return intersect(intersect([...group[0]], [...group[1]]), [...group[2]])[0]
+	return intersect(...group.map((str) => [...str]))[0]
 }
 export function part2(input: string[]): number {
 	return partition(input, 3)

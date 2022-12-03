@@ -46,8 +46,10 @@ export function permute<T1, T2>(a1: T1[], a2: T2[]): [T1, T2][] {
 }
 
 export const uniq = <T>(a: Array<T>): Array<T> => [...new Set([...a]).values()]
-export const intersect = <T>(a: Array<T>, b: Array<T>): Array<T> => {
-	return [...new Set([...a].filter((x) => b.includes(x)))]
+export const intersect = <T>(...arrs: Array<Array<T>>): Array<T> => {
+	if (arrs.length === 1) return arrs[0]
+	const [a, ...rest] = arrs
+	return intersect(...rest).filter((x) => a.includes(x))
 }
 
 export const partition = <T>(
@@ -61,37 +63,7 @@ export const partition = <T>(
 	return groups
 }
 
-export const uniqifyPoints = (points: Point[]): Point[] =>
-	uniq(points.map(serializePoint)).map(deserializePoint)
 
-export interface Point {
-	x: number
-	y: number
-}
-
-export const serializePoint = (p: Point): string => `${p.x},${p.y}`
-export const deserializePoint = (s: string): Point => {
-	const r = /(?<x>\d+),(?<y>\d+)/.exec(s)
-	if (!r || !r.groups) throw new Error('Invalid point')
-	return { x: parseInt(r.groups.x, 10), y: parseInt(r.groups.y, 10) }
-}
-
-export const isInBounds = <T>(grid: T[][], { x, y }: Point): boolean =>
-	x >= 0 && x < grid[0].length && y >= 0 && y < grid.length
-
-export const getNeighbors = <T>(
-	grid: T[][],
-	{ x, y }: Point,
-	orthogonal: boolean = true
-): Array<Point> =>
-	permute(range(-1, 1), range(-1, 1))
-		.filter(([dx, dy]) => !(dx === 0 && dy === 0))
-		.filter(([dx, dy]) => !(orthogonal && Math.abs(dx) === Math.abs(dy)))
-		.map(([dx, dy]) => ({
-			x: x + dx,
-			y: y + dy,
-		}))
-		.filter((p) => isInBounds(grid, p))
 
 export const isNotUndefined = <T>(value: T | undefined): value is T =>
 	value !== undefined
