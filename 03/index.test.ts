@@ -3,7 +3,6 @@ import {
 	part2,
 	getDuplicateItem,
 	getPriority,
-	getGroups,
 	getBadgeForGroup,
 } from './'
 
@@ -19,7 +18,7 @@ test('Part 1', () => {
 })
 
 test('Part 2', () => {
-	expect(part2(input)).toBe(0)
+	expect(part2(input)).toBe(70)
 })
 
 test('getDuplicateItem', () => {
@@ -31,13 +30,6 @@ test('getPriority', () => {
 	expect(getPriority('z')).toBe(26)
 	expect(getPriority('A')).toBe(27)
 	expect(getPriority('Z')).toBe(52)
-})
-
-test('getGroups', () => {
-	expect(getGroups(['a', 'b', 'c', 'A', 'B', 'C'])).toEqual([
-		['a', 'b', 'c'],
-		['A', 'B', 'C'],
-	])
 })
 
 test('getBadgeForGroup', () => {

@@ -1,5 +1,4 @@
-import { getHigherNeighbors } from '09'
-import { permute, range, getNeighbors } from './util'
+import { permute, range, getNeighbors, partition } from './util'
 
 test('permute', () => {
 	const permutations = permute(['a', 'b'], [1, 2])
@@ -44,4 +43,11 @@ test('getNeighbors, center non-orthogonal', () => {
 	]
 	const neighbors = getNeighbors(grid, { x: 1, y: 1 }, false)
 	expect(neighbors.length).toBe(8)
+})
+
+test('partition', () => {
+	expect(partition([1, 2, 3, 4, 5, 6], 3)).toEqual([
+		[1, 2, 3],
+		[4, 5, 6],
+	])
 })

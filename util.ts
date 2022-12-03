@@ -50,6 +50,17 @@ export const intersect = <T>(a: Array<T>, b: Array<T>): Array<T> => {
 	return [...new Set([...a].filter((x) => b.includes(x)))]
 }
 
+export const partition = <T>(
+	a: Array<T>,
+	chunkSize: number
+): Array<Array<T>> => {
+	const groups = []
+	for (let i = 0; i < a.length; i += chunkSize) {
+		groups.push(a.slice(i, i + chunkSize))
+	}
+	return groups
+}
+
 export const uniqifyPoints = (points: Point[]): Point[] =>
 	uniq(points.map(serializePoint)).map(deserializePoint)
 
