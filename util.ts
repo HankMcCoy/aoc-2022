@@ -46,6 +46,9 @@ export function permute<T1, T2>(a1: T1[], a2: T2[]): [T1, T2][] {
 }
 
 export const uniq = <T>(a: Array<T>): Array<T> => [...new Set([...a]).values()]
+export const intersect = <T>(a: Array<T>, b: Array<T>): Array<T> => {
+	return [...new Set([...a].filter((x) => b.includes(x)))]
+}
 
 export const uniqifyPoints = (points: Point[]): Point[] =>
 	uniq(points.map(serializePoint)).map(deserializePoint)

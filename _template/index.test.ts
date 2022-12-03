@@ -1,6 +1,6 @@
 import { part1, part2 } from './'
 
-const input = ''.split('\n')
+const input = ``.split('\n')
 
 test('Part 1', () => {
 	expect(part1(input)).toBe(0)
